@@ -3,8 +3,10 @@ from .models import Category, Job, Company
 
 # Register your models here.
 
-
-
-admin.site.register(Job)
+class JobAdmin(admin.ModelAdmin):
+    list_display = ['title','location','company','jop_type','vacancy', 'category']
+    search_fields = ['title', 'category', 'description']
+    list_filter = ['jop_type','vacancy','category', 'experience']
+admin.site.register(Job, JobAdmin)
 admin.site.register(Company)
 admin.site.register(Category)
