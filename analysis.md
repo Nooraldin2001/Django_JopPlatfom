@@ -2,7 +2,7 @@ job:
     - title 
     - img
     - location 
-    - creation date
+    - creation_date
     - company name 
     - company logo 
     - company subtitle
