@@ -1,0 +1,18 @@
+job: 
+    - title 
+    - img
+    - location 
+    - creation date
+    - company name 
+    - company logo 
+    - company subtitle
+    - company website
+    - company email
+    - salary_range
+    - job_description
+    - vacancy
+    - jop nature [full time, part time, remote, freelance] 
+    -  salary 
+    - application date
+    - experince 
+    - category 
