@@ -44,10 +44,10 @@ class Migration(migrations.Migration):
                 ('salary_end', models.IntegerField(blank=True, null=True)),
                 ('description', models.TextField(max_length=15000)),
                 ('vacancy', models.IntegerField()),
-                ('jop_type', models.CharField(choices=[('FullTime', 'Full Time'), ('Remote', 'Remote'), ('Freelance', 'Freelance'), ('PartTime', 'Part Time')], max_length=10)),
+                ('job_type', models.CharField(choices=[('FullTime', 'Full Time'), ('Remote', 'Remote'), ('Freelance', 'Freelance'), ('PartTime', 'Part Time')], max_length=10)),
                 ('experience', models.IntegerField()),
-                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='job_category', to='jop.category')),
-                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='jop_company', to='jop.company')),
+                ('category', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='job_category', to='job.category')),
+                ('company', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='job_company', to='job.company')),
             ],
         ),
     ]

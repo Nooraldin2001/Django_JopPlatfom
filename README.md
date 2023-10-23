@@ -1,1 +1,1 @@
-# Django_JopPlatfom
+# Django_JobPlatfom

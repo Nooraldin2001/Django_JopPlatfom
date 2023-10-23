@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class JopConfig(AppConfig):
+class jobConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'jop'
+    name = 'job'

@@ -11,7 +11,7 @@ job:
     - salary_range
     - job_description
     - vacancy
-    - jop nature [full time, part time, remote, freelance] 
+    - job nature [full time, part time, remote, freelance] 
     -  salary 
     - application date
     - experince 
