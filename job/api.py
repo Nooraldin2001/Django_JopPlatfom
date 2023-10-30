@@ -35,6 +35,6 @@ class JopListAPI(generics.ListAPIView):
     serializer_class = JobSerializer
 
 
-class JopDetailAPI(generics.RetrieveAPIView):
+class JopDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Job.objects.all() #it can handle the only one retreving process
     serializer_class = JobSerializer
