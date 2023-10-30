@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import JobSerializer
 from .models import Job
+from rest_framework import generics
 
 
 @api_view(['GET'])
@@ -27,3 +28,13 @@ def job_detail_api(request, id):
     job = Job.objects.get(id=id)
     data = JobSerializer(job).data
     return Response({'Job':data})
+
+
+class JopListAPI(generics.ListAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
+
+
+class JopDetailAPI(generics.RetrieveAPIView):
+    queryset = Job.objects.all() #it can handle the only one retreving process
+    serializer_class = JobSerializer
