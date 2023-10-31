@@ -4,6 +4,9 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework import filters
+from rest_framework.permissions import IsAuthenticated
+
+
 
 
 from .serializers import JobSerializer
@@ -37,12 +40,15 @@ from rest_framework.response import Response
 """
 
 
-class JopListAPI(generics.ListAPIView):
+class JopListAPI(generics.ListCreateAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ['title', 'vacancy', 'job_type']
-    search_fields = ['username', 'email']
+    search_fields = ['title', 'description']
+    ordering_fields = ['salary_start', 'salary_end', 'experience']
+    permission_classes = [IsAuthenticated]
+
 
 
 
