@@ -71,3 +71,20 @@ class Company(models.Model):
         return self.name
 
 
+
+
+class JobApply(models.Model):
+    job = models.ForeignKey(Job, related_name='apply_job', on_delete=models.CASCADE)
+    username = models.CharField(max_length=100)
+    email = models.EmailField()
+    linkedIn_url = models.URLField(null=True, blank=True, help_text="please enter your linkdin profile url")
+    githup_url = models.URLField(null=True, blank=True, help_text='please enter your githup profile url')
+    cv = models.FileField(upload_to='cv', help_text='please upload your file here')
+    cover_letter = models.TextField(max_length=500, help_text='add your cover leter here...')
+    created_at = models.DateTimeField(default=timezone.now)
+
+
+    def __str__(self):
+        return self.username
+
+

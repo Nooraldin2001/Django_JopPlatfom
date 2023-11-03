@@ -39,13 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'django_filters',
+    "bootstrap4",
 
 
     #third party apps 
     'rest_framework',
     'rest_framework.authtoken',
     'django_summernote',
-
 
 
     #my apps 
