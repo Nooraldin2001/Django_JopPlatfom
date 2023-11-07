@@ -6,7 +6,19 @@ from .forms import JobApplyForm, JobForm
 #brings the normal get but with error handling 404
 from django.shortcuts import get_object_or_404
 
-# Create your views here.
+
+def mydebug(request):
+    data = Job.objects.all()
+    return render(request, 'job/debug.html', {'data':data})
+
+
+
+
+
+
+
+
+
 
 def job_list(request):
 
