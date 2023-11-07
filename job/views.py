@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Job, JobApply
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import CreateView
+from .forms import JobApplyForm
 #brings the normal get but with error handling 404
 from django.shortcuts import get_object_or_404
 
@@ -34,8 +35,9 @@ def job_detail(request, slug):
 class JobApply(CreateView):
     model = JobApply
     success_url = '/jobs'
-    fields = ['username', 'email', 'linkedIn_url', 'githup_url', 'cv', 'cover_letter']
-    
+    #fields = ['username', 'email', 'linkedIn_url', 'githup_url', 'cv', 'cover_letter']
+    form_class = JobApplyForm
+
     def form_valid(self, form):
         # Get the job slug from the URL
         job_slug = self.kwargs.get('slug')

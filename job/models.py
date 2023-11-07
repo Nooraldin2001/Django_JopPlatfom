@@ -2,6 +2,8 @@ from django.db import models
 from django_countries.fields import CountryField
 from django.utils import timezone
 from django.utils.text import slugify
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 
 
 job_TYPE = [
@@ -72,19 +74,43 @@ class Company(models.Model):
 
 
 
+""" without validators """
+# class JobApply(models.Model):
+#     job = models.ForeignKey(Job, related_name='apply_job', on_delete=models.CASCADE)
+#     username = models.CharField(max_length=100)
+#     email = models.EmailField()
+#     linkedIn_url = models.URLField(null=True, blank=True, help_text="please enter your linkdin profile url")
+#     githup_url = models.URLField(null=True, blank=True, help_text='please enter your githup profile url')
+#     cv = models.FileField(upload_to='cv', help_text='please upload your file here')
+#     cover_letter = models.TextField(max_length=500, help_text='add your cover leter here...')
+#     created_at = models.DateTimeField(default=timezone.now)
+
+
+#     def __str__(self):
+#         return self.username
+
+
+def validate_pdf_file(value):
+    """this will help us only accept pdf files in the data"""
+    if not value.name.lower().endswith('.pdf'):
+        raise ValidationError('Only PDF files are allowed.')
 
 class JobApply(models.Model):
     job = models.ForeignKey(Job, related_name='apply_job', on_delete=models.CASCADE)
     username = models.CharField(max_length=100)
     email = models.EmailField()
-    linkedIn_url = models.URLField(null=True, blank=True, help_text="please enter your linkdin profile url")
-    githup_url = models.URLField(null=True, blank=True, help_text='please enter your githup profile url')
-    cv = models.FileField(upload_to='cv', help_text='please upload your file here')
-    cover_letter = models.TextField(max_length=500, help_text='add your cover leter here...')
+    linkedIn_url = models.URLField(null=True, blank=True, help_text="Please enter your LinkedIn profile URL")
+    githup_url = models.URLField(null=True, blank=True, help_text='Please enter your GitHub profile URL')
+    cv = models.FileField(
+        upload_to='cv',
+        help_text='Please upload your file here',
+        validators=[validate_pdf_file]
+    )
+    cover_letter = models.TextField(max_length=500, help_text='Add your cover letter here...')
     created_at = models.DateTimeField(default=timezone.now)
-
 
     def __str__(self):
         return self.username
+
 
 
