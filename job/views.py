@@ -3,12 +3,77 @@ from .models import Job, JobApply
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import CreateView
 from .forms import JobApplyForm, JobForm
+from django.db.models import Q, F
+from django.db.models.aggregates import Sum, Min, Max, Count, Avg
 #brings the normal get but with error handling 404
 from django.shortcuts import get_object_or_404
 
 
 def mydebug(request):
-    data = Job.objects.all()
+    # data = Job.objects.filter(experience__lte=5)
+    # data = Job.objects.filter(experience__lt=5)
+    # data = Job.objects.filter(experience__gt=5)
+    # data = Job.objects.filter(experience__gte=5)
+    # data = Job.objects.filter(experience__range=(2,4))
+
+
+
+    # data = Job.objects.filter(company__id=5)
+    # data = Job.objects.filter(company__id__gt=5)
+
+    # data = Job.objects.filter(title__contains='backend')
+    # data = Job.objects.filter(title__startswith='a')
+    # data = Job.objects.filter(title__endswith='needed')
+    # data = Job.objects.filter(salary_start__isnull=True)
+
+
+
+    # data = Job.objects.filter(created_at__year=2023)    
+    # data = Job.objects.filter(created_at__month=10)    
+    # data = Job.objects.filter(created_at__date='2023-10-25')    
+    
+    
+    
+    
+    # data = Job.objects.filter(salary_start__gt=1000, experience__gt=5)  # and
+   
+    # data = Job.objects.filter(
+    #     Q(salary_start__gt=1000) |
+    #     Q(experience__gt=5))  # or
+    
+    # data = Job.objects.filter(
+    #     Q(salary_start__gt=1000) &
+    #     Q(experience__gt=5))  # and 
+    
+    # data = Job.objects.filter(
+    #     Q(salary_start__gt=1000) &
+    #     ~Q(experience__gt=5))  # not
+
+    # data = Job.objects.filter(salary_start=F('salary_end'))
+    
+    # data = Job.objects.all().order_by('experience')decs 
+    # data = Job.objects.all().order_by('-experience')asce
+    # data = Job.objects.order_by('-experience', 'salary_start')
+    # data = Job.objects.all().order_by('experience')[0]
+    # data = Job.objects.all().earliest('experience')
+    # data = Job.objects.all().latest('experience')
+
+    # data = Job.objects.all()[:5]
+    # data = Job.objects.all()[5:10]
+    
+    
+    
+    # data = Job.objects.values_list('id','title')
+    # data = Job.objects.values('id','title').distinct()
+    # data = Job.objects.values('id','title')
+
+    # data = Job.objects.only('id','title')
+    # data = Job.objects.defer('category')
+
+    # data = Job.objects.aggregate(mysum = Sum('experience'), minsalary=Min('salary_start'))
+
+    data = Job.objects.annotate(salary_with_tax = F('salary_start')*1.25)
+
     return render(request, 'job/debug.html', {'data':data})
 
 
