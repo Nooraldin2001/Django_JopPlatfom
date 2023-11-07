@@ -1,6 +1,8 @@
 from django import forms
-from .models import JobApply
+from .models import JobApply, Job
 from django.core.validators import FileExtensionValidator
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+
 
 
 
@@ -16,3 +18,11 @@ class JobApplyForm(forms.ModelForm):
         model = JobApply
         fields = ['username', 'email', 'linkedIn_url', 'githup_url', 'cv', 'cover_letter']
        
+
+class JobForm(forms.ModelForm):
+    description = forms.CharField(widget=SummernoteWidget())
+    class Meta:
+        model = Job
+        fields = ['title', 'location', 'company', 'salary_start', 'salary_end', 'description', 'vacancy', 'job_type', 'experience', 'category']
+
+        
