@@ -9,6 +9,10 @@ from django.db.models.aggregates import Sum, Min, Max, Count, Avg
 from django.shortcuts import get_object_or_404
 
 
+from django.views.decorators.cache import cache_page
+
+
+@cache_page(60 * 1)
 def mydebug(request):
     # data = Job.objects.filter(experience__lte=5)
     # data = Job.objects.filter(experience__lt=5)
@@ -72,7 +76,10 @@ def mydebug(request):
 
     # data = Job.objects.aggregate(mysum = Sum('experience'), minsalary=Min('salary_start'))
 
-    data = Job.objects.annotate(salary_with_tax = F('salary_start')*1.25)
+    # data = Job.objects.annotate(salary_with_tax = F('salary_start')*1.25)
+
+
+    data = Job.objects.only('id','title')
 
     return render(request, 'job/debug.html', {'data':data})
 
